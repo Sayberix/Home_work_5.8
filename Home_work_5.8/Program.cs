@@ -27,13 +27,13 @@ namespace Home_work_5._8
             // OutputArray(array);
 
             // Функция заполнения массива
-            void FillArray(int[,] ArrayInFunction)
+            void FillArray(int[,] mainArray)
             {
-                for (int i = 0; i < ArrayInFunction.GetLength(0); i++)
+                for (int i = 0; i < mainArray.GetLength(0); i++)
                 {
-                    for (int j = 0; j < ArrayInFunction.GetLength(1); j++)
+                    for (int j = 0; j < mainArray.GetLength(1); j++)
                     {
-                        ArrayInFunction[i, j] = new Random().Next(11);
+                        mainArray[i, j] = new Random().Next(11);
                     }
                 }
             }
@@ -53,17 +53,19 @@ namespace Home_work_5._8
             }
 
             // Функция вывода массива
-            void OutputArray(int[,] ArrayInFunction)
+            void OutputArray(int[,] mainArray)
             {
-                for (int i = 0; i < ArrayInFunction.GetLength(0); i++)
+                for (int i = 0; i < mainArray.GetLength(0); i++)
                 {
-                    for (int j = 0; j < ArrayInFunction.GetLength(1); j++)
+                    for (int j = 0; j < mainArray.GetLength(1); j++)
                     {
-                        Console.Write(ArrayInFunction[i, j] + "\t");
+                        Console.Write(mainArray[i, j] + "\t");
                     }
                     Console.Write("\n");
                 }
             }
+
+
         }
     }
 }

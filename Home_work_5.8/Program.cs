@@ -14,6 +14,56 @@ namespace Home_work_5._8
             // 5 2 6 7
             // Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
 
+            int m = 5, n = 4;
+            int[,] array = new int[m, n];
+            int[] sumRow = new int[m];
+
+            FillArray(array);
+            Console.WriteLine("Исходный массив:");
+            OutputArray(array);
+            CalculateSumRow(array, sumRow);
+            Console.Write("\n");
+            // Console.WriteLine("Отсортированный массив по строкам:");
+            // OutputArray(array);
+
+            // Функция заполнения массива
+            void FillArray(int[,] ArrayInFunction)
+            {
+                for (int i = 0; i < ArrayInFunction.GetLength(0); i++)
+                {
+                    for (int j = 0; j < ArrayInFunction.GetLength(1); j++)
+                    {
+                        ArrayInFunction[i, j] = new Random().Next(11);
+                    }
+                }
+            }
+
+            // Функция суммирования элементов по строкам
+            void CalculateSumRow(int[,] mainArray, int[] calculateSum)
+            {
+                for (int i = 0; i < mainArray.GetLength(0); i++)
+                {
+                    int sum = 0;
+                    for (int j = 0; j < mainArray.GetLength(1); j++)
+                    {
+                        sum += mainArray[i, j];
+                    }
+                    calculateSum[i] = sum;
+                }
+            }
+
+            // Функция вывода массива
+            void OutputArray(int[,] ArrayInFunction)
+            {
+                for (int i = 0; i < ArrayInFunction.GetLength(0); i++)
+                {
+                    for (int j = 0; j < ArrayInFunction.GetLength(1); j++)
+                    {
+                        Console.Write(ArrayInFunction[i, j] + "\t");
+                    }
+                    Console.Write("\n");
+                }
+            }
         }
     }
 }

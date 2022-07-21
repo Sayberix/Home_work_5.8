@@ -6,67 +6,25 @@ namespace Home_work_5._8
     {
         private static void Main(string[] args)
         {
-            // Задача 56: Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
-            // Например, задан массив:
+            // Задача 58: Задайте две матрицы.Напишите программу, которая будет находить произведение двух матриц.
+            // Например, заданы 2 массива:
             // 1 4 7 2
             // 5 9 2 3
             // 8 4 2 4
             // 5 2 6 7
-            // Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
+            // и
+            // 1 5 8 5
+            // 4 9 4 2
+            // 7 2 2 6
+            // 2 3 4 7
 
-            int m = 5, n = 4;
-            int[,] array = new int[m, n];
-            int[] sumRow = new int[m];
+            // Их произведение будет равно следующему массиву:
+            // 1 20 56 10
+            // 20 81 8 6
+            // 56 8 4 24
+            // 10 6 24 49
 
-            Console.WriteLine("Исходный массив:");
-            FillArrayAndOutput(array);
-            CalculateSumRow(array, sumRow);
-            Console.Write("\n");
-            Console.WriteLine($"Суммы элементов по строкам: [{String.Join("; ", sumRow)}]");
-            Console.WriteLine($"Строка с наименьшей суммой элементов: {FindSmallestSum(sumRow)}");
 
-            // Функция заполнения массива и его вывод
-            void FillArrayAndOutput(int[,] mainArray)
-            {
-                for (int i = 0; i < mainArray.GetLength(0); i++)
-                {
-                    for (int j = 0; j < mainArray.GetLength(1); j++)
-                    {
-                        mainArray[i, j] = new Random().Next(11);
-                        Console.Write(mainArray[i, j] + "\t");
-                    }
-                    Console.Write("\n");
-                }
-            }
-
-            // Функция суммирования элементов по строкам
-            void CalculateSumRow(int[,] mainArray, int[] calculateSum)
-            {
-                for (int i = 0; i < mainArray.GetLength(0); i++)
-                {
-                    int sum = 0;
-                    for (int j = 0; j < mainArray.GetLength(1); j++)
-                    {
-                        sum += mainArray[i, j];
-                    }
-                    calculateSum[i] = sum;
-                }
-            }
-
-            // Функция поиска наименьшей суммы элементов по строкам
-            int FindSmallestSum(int[] calculateSum)
-            {
-                int min = calculateSum[0], minPositionRow = 1;
-                for (int i = 0; i < calculateSum.Length; i++)
-                {
-                    if (calculateSum[i] < min)
-                    {
-                        min = calculateSum[i];
-                        minPositionRow = i + 1;
-                    }   
-                }
-                return (minPositionRow);
-            }
         }
     }
 }

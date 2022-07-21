@@ -18,23 +18,24 @@ namespace Home_work_5._8
             int[,] array = new int[m, n];
             int[] sumRow = new int[m];
 
-            FillArray(array);
             Console.WriteLine("Исходный массив:");
-            OutputArray(array);
+            FillArrayAndOutput(array);
             CalculateSumRow(array, sumRow);
             Console.Write("\n");
-            // Console.WriteLine("Отсортированный массив по строкам:");
-            // OutputArray(array);
+            Console.WriteLine($"Суммы элементов по строкам: [{String.Join("; ", sumRow)}]");
+            Console.WriteLine($"Строка с наименьшей суммой элементов: {FindSmallestSum(sumRow)}");
 
-            // Функция заполнения массива
-            void FillArray(int[,] mainArray)
+            // Функция заполнения массива и его вывод
+            void FillArrayAndOutput(int[,] mainArray)
             {
                 for (int i = 0; i < mainArray.GetLength(0); i++)
                 {
                     for (int j = 0; j < mainArray.GetLength(1); j++)
                     {
                         mainArray[i, j] = new Random().Next(11);
+                        Console.Write(mainArray[i, j] + "\t");
                     }
+                    Console.Write("\n");
                 }
             }
 
@@ -52,20 +53,20 @@ namespace Home_work_5._8
                 }
             }
 
-            // Функция вывода массива
-            void OutputArray(int[,] mainArray)
+            // Функция поиска наименьшей суммы элементов по строкам
+            int FindSmallestSum(int[] calculateSum)
             {
-                for (int i = 0; i < mainArray.GetLength(0); i++)
+                int min = calculateSum[0], minPositionRow = 1;
+                for (int i = 0; i < calculateSum.Length; i++)
                 {
-                    for (int j = 0; j < mainArray.GetLength(1); j++)
+                    if (calculateSum[i] < min)
                     {
-                        Console.Write(mainArray[i, j] + "\t");
-                    }
-                    Console.Write("\n");
+                        min = calculateSum[i];
+                        minPositionRow = i + 1;
+                    }   
                 }
+                return (minPositionRow);
             }
-
-
         }
     }
 }

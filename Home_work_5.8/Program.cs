@@ -6,62 +6,11 @@ namespace Home_work_5._8
     {
         private static void Main(string[] args)
         {
-            // Задача 58: Задайте две матрицы.Напишите программу, которая будет находить произведение двух матриц.
-            // Например, заданы 2 массива:
-            // 1 4 7 2
-            // 5 9 2 3
-            // 8 4 2 4
-            // 5 2 6 7
-            // и
-            // 1 5 8 5
-            // 4 9 4 2
-            // 7 2 2 6
-            // 2 3 4 7
+            // Задача 60.Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
+            // массив размером 2 x 2 x 2
+            // 12(0, 0, 0) 22(0, 0, 1)
+            // 45(1, 0, 0) 53(1, 0, 1)
 
-            // Их произведение будет равно следующему массиву:
-            // 1 20 56 10
-            // 20 81 8 6
-            // 56 8 4 24
-            // 10 6 24 49
-
-            int m = 5, n = 4;
-            int[,] firstArray = new int[m, n];
-            int[,] secondArray = new int[m, n];
-
-            Console.WriteLine("Исходный первый массив:");
-            FillArrayAndOutput(firstArray);
-            Console.WriteLine("Исходный второй массив:");
-            FillArrayAndOutput(secondArray);
-            Console.WriteLine("Массив с результатом умножения двух исходных массивов:");
-            ArrayMultiplication(firstArray, secondArray);
-
-            // Функция заполнения массива и его вывод
-            void FillArrayAndOutput(int[,] ArrayInFunction)
-            {
-                for (int i = 0; i < ArrayInFunction.GetLength(0); i++)
-                {
-                    for (int j = 0; j < ArrayInFunction.GetLength(1); j++)
-                    {
-                        ArrayInFunction[i, j] = new Random().Next(11);
-                        Console.Write(ArrayInFunction[i, j] + "\t");
-                    }
-                    Console.Write("\n");
-                }
-                Console.Write("\n");
-            }
-
-            // Функция произведения элементов двух матриц
-            void ArrayMultiplication(int[,] firstArray, int[,] secondArray)
-            {
-                int lengthRow = firstArray.GetLength(0); int lengthColumn = firstArray.GetLength(1);
-                int[,] resaultMultiplication = new int[lengthRow, lengthColumn];
-                for (int i = 0; i < lengthRow; i++)
-                {
-                    for (int j = 0; j < lengthColumn; j++)
-                        Console.Write((firstArray[i, j] * secondArray[i, j]) + "\t");
-                    Console.Write("\n");
-                }
-            }
         }
     }
 }

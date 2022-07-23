@@ -13,29 +13,37 @@ namespace Home_work_5._8
             // 45(1, 0, 0) 53(1, 0, 1)
 
             int m = 2, n = 2, p = 2;
-            int rangeMin = -99, rangeMax = 100, range = rangeMax - rangeMin;
-            if(m*n*p > range)
+            // Диапазоны среди положительных и отрицательных значений
+            int rangeMaxNegative = -99, rangeMinNegative = -9, rangeMinPositive = 9, rangeMaxPositive = 99;
+            // Расчет размерности отсортированного массива с учетом заданых диапазонов
+            int range = rangeMaxPositive - rangeMinPositive + (-rangeMaxNegative) - (-rangeMinNegative);
+            if (m*n*p > range)
             {
-                Console.WriteLine("Неверно введенные начальные параметры! Несоотвествие параметров размерности матрицы и диапазона выборки уникальных значений. Программа завершает работу!");
+                Console.WriteLine("Неверно введенные начальные параметры! Несоответствие параметров размерности матрицы и диапазона выборки уникальных значений!");
+                Console.WriteLine("Программа завершает работу!");
                 return;
             }
             int[] arraySorted = new int[range];
             int[,,] array = new int[m, n, p];
 
-            Console.WriteLine("Исходный массив:");
-            FillSortedArrayInRange(arraySorted, rangeMin, rangeMax, range);
+            FillSortedArrayInRange(arraySorted, rangeMaxNegative, rangeMaxPositive, range);
+            /* для наглядности - вывод отсортированного массива после его инициализации
             Console.WriteLine($"[{String.Join(";", arraySorted)}]");
-            Console.WriteLine($"Длина массива: {arraySorted.Length}");
+            Console.WriteLine($"Длина массива: {arraySorted.Length}");*/
+            Console.WriteLine("Результат:");
             FillArrayAndOutput(array);
+            /* вывод отсортированого массива после произовльной выборки элементов из него
             Console.WriteLine($"[{String.Join(";", arraySorted)}]");
-            Console.WriteLine($"Длина массива: {arraySorted.Length}");
+            Console.WriteLine($"Длина массива: {arraySorted.Length}");*/
 
+            // заполнения отсоритрованного массива уникальными значениями из заданых диапазонов
             void FillSortedArrayInRange(int[] ArrayInFunction, int min, int max, int range)
             {
                 int count = 0;
                 for (int i = min; i <= max; i++)
                 {
-                    if (count < range)
+                    // Условие для диапазонов среди положительных и отрицательных двухзначных чисел 
+                    if (count < range && i < -9 || i > 9 && i !=0)
                     {
                         ArrayInFunction[count] = i;
                         count++;
@@ -43,10 +51,10 @@ namespace Home_work_5._8
                 }
             }
 
+            // выборка произвольных значений из отсортированного массива с последующим удалением выбраного элемента в этом же массиве
             int RandomSample(int[] ArrayInFunction)
             {
                 int sample = ArrayInFunction[new Random().Next(0, ArrayInFunction.Length)];
-                //Console.WriteLine($"Выбрали случайный элемент: {sample} c индексом {Array.IndexOf(ArrayInFunction, sample)}");
                 int indexSample = Array.IndexOf(ArrayInFunction, sample);
                 Array.Clear(ArrayInFunction, indexSample, 1);
                 for (int i = indexSample; i < ArrayInFunction.Length-1; i++)

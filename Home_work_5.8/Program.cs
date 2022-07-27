@@ -13,85 +13,83 @@ namespace Home_work_5._8
             // 11 16 15 6
             // 10 9  8  7
 
-            int m = 4, n = 4;
+            int m = 5, n = 5;
             int[,] array = new int[m, n];
+            int countRow = m, countCol = n, currentPosition, countFill = 0;
+            if (countRow >= countCol)
+                currentPosition = countRow;
+            else
+                currentPosition = countCol;
+            for (int i = 0; i < Math.Ceiling((decimal)currentPosition / 2); i++)
+            {
+                countFill = FillTopRow(array, countFill, countRow, countCol, i);
+                countFill = FillRightCol(array, countFill, countRow, countCol, i);
+                countFill = FillRLowerRow(array, countFill, countRow, countCol, i);
+                countFill = FillLeftCol(array, countFill, countRow, countCol, i);
+            }
 
-            int countFill = 0;
-
-            int countRow = m, countCol = n;
-            countFill = FillTopRow(array, countFill, countRow, countCol);
-            countFill = FillRightCol(array, countFill, countRow, countCol);
-            countFill = FillRLowerRow(array, countFill, countRow, countCol);
-            countFill = FillLeftCol(array, countFill, countRow, countCol);
             Console.WriteLine("Результат:");
             PrintArray(array);
-            Console.WriteLine(countFill);
-            // Функция заполнения массива
+            Console.WriteLine("Всего заполненных элементов в массиве: " + countFill);
 
-            int FillTopRow(int[,] ArrayInFunction, int countFill, int countRow, int countCol)
+            // Функции заполнения массива
+            int FillTopRow(int[,] ArrayInFunction, int countFill, int countRow, int countCol, int globalCount)
             {
-                for (int i = 0; i < countRow; i++)
-                {
-                    for (int j = 0; j < countCol; j++)
-                    {
-                        if (ArrayInFunction[i, j] == 0 || j != 0)
-                        {
-                            ArrayInFunction[i, j] = countFill;
-                            countFill++;
-                        }
-                    }
-                    break;
-                }
-                return (countFill);
-            }
-
-            int FillRightCol(int[,] ArrayInFunction, int countFill, int countRow, int countCol)
-            {
-                for (int j = countCol - 1; j < countCol; j++)
-                {
-                    for (int i = 0; i < countRow; i++)
-                    {
-                        if (ArrayInFunction[i, j] == 0)
-                        {
-                            ArrayInFunction[i, j] = countFill;
-                            countFill++;
-                        }
-                    }
-                    break;
-                }
-                return (countFill);
-            }
-
-            int FillRLowerRow(int[,] ArrayInFunction, int countFill, int countRow, int countCol)
-            {
-                for (int i = countRow - 1; i >= 0; i--)
-                {
-                    for (int j = countCol - 1; j >= 0; j--)
-                    {
-                        if (ArrayInFunction[i, j] == 0)
-                        {
-                            ArrayInFunction[i, j] = countFill;
-                            countFill++;
-                        }
-                    }
-                    break;
-                }
-                return (countFill);
-            }
-
-            int FillLeftCol(int[,] ArrayInFunction, int countFill, int countRow, int countCol)
-            {
+                countRow -= 1;
+                int i = countRow - (countRow - globalCount);
                 for (int j = 0; j < countCol; j++)
                 {
-                    for (int i = countRow - 1; i > 0; i--)
+                    if (ArrayInFunction[i, j] == 0)
                     {
-                        if (ArrayInFunction[i, j] == 0)
-                        {
-                            ArrayInFunction[i, j] = countFill;
-                            countFill++;
-                        }
+                        ArrayInFunction[i, j] = countFill;
+                        countFill++;
                     }
-                    break;
+                }
+                return (countFill);
+            }
+
+            int FillRightCol(int[,] ArrayInFunction, int countFill, int countRow, int countCol, int globalCount)
+            {
+                countCol -= 1;
+                int j = countCol - globalCount;
+                for (int i = 0; i < countRow; i++)
+                {
+                    if (ArrayInFunction[i, j] == 0)
+                    {
+                        ArrayInFunction[i, j] = countFill;
+                        countFill++;
+                    }
+                }
+
+                return (countFill);
+            }
+
+            int FillRLowerRow(int[,] ArrayInFunction, int countFill, int countRow, int countCol, int globalCount)
+            {
+                countRow -= 1;
+                int i = countRow - globalCount;
+                for (int j = countCol-1; j > 0; j--)
+                {
+                    if (ArrayInFunction[i, j] == 0)
+                    {
+                        ArrayInFunction[i, j] = countFill;
+                        countFill++;
+                    }
+                }
+                return (countFill);
+            }
+
+            int FillLeftCol(int[,] ArrayInFunction, int countFill, int countRow, int countCol, int globalCount)
+            {
+                countCol -= 1;
+                int j = globalCount;
+                for (int i = countRow-1; i > 0; i--)
+                {
+                    if (ArrayInFunction[i, j] == 0 && i != 0)
+                    {
+                        ArrayInFunction[i, j] = countFill;
+                        countFill++;
+                    }
                 }
                 return (countFill);
             }

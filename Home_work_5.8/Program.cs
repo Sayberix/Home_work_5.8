@@ -13,19 +13,34 @@ namespace Home_work_5._8
             // 11 16 15 6
             // 10 9  8  7
 
-            int m = 5, n = 5;
+            // Параметры ввода размеров двухмерной матрицы
+            int m = 4, n = 4;
+
             int[,] array = new int[m, n];
             int countRow = m, countCol = n, currentPosition, countFill = 0;
-            if (countRow >= countCol)
-                currentPosition = countRow;
-            else
-                currentPosition = countCol;
-            for (int i = 0; i < Math.Ceiling((decimal)currentPosition / 2); i++)
+
+            // Проверка начальных условий
+            if (m >= 3 && n >= 3)
             {
-                countFill = FillTopRow(array, countFill, countRow, countCol, i);
-                countFill = FillRightCol(array, countFill, countRow, countCol, i);
-                countFill = FillRLowerRow(array, countFill, countRow, countCol, i);
-                countFill = FillLeftCol(array, countFill, countRow, countCol, i);
+                // Выбираем самую большую сторону матрицы
+                if (countRow >= countCol)
+                    currentPosition = countRow;
+                else
+                    currentPosition = countCol;
+
+                // Цикл спирального заполнения матрицы
+                for (int i = 0; i < Math.Ceiling((decimal)currentPosition / 2); i++)
+                {
+                    countFill = FillTopRow(array, countFill, countRow, countCol, i);
+                    countFill = FillRightCol(array, countFill, countRow, countCol, i);
+                    countFill = FillLowerRow(array, countFill, countRow, countCol, i);
+                    countFill = FillLeftCol(array, countFill, countRow, countCol, i);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Размер заданного двухмерного массива должен быть не менее 3х3! Программа прекращает работу!");
+                return;
             }
 
             Console.WriteLine("Результат:");
@@ -64,11 +79,11 @@ namespace Home_work_5._8
                 return (countFill);
             }
 
-            int FillRLowerRow(int[,] ArrayInFunction, int countFill, int countRow, int countCol, int globalCount)
+            int FillLowerRow(int[,] ArrayInFunction, int countFill, int countRow, int countCol, int globalCount)
             {
                 countRow -= 1;
                 int i = countRow - globalCount;
-                for (int j = countCol-1; j > 0; j--)
+                for (int j = countCol - 1; j > 0; j--)
                 {
                     if (ArrayInFunction[i, j] == 0)
                     {
@@ -83,7 +98,7 @@ namespace Home_work_5._8
             {
                 countCol -= 1;
                 int j = globalCount;
-                for (int i = countRow-1; i > 0; i--)
+                for (int i = countRow - 1; i > 0; i--)
                 {
                     if (ArrayInFunction[i, j] == 0 && i != 0)
                     {
